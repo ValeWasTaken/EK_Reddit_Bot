@@ -11,3 +11,10 @@ Alpha Version 1.0 is suspected to support zkillboard and post the following info
 - Total ISK: __
 
 More features will be added in the future if desired. (Such as other killmail websites or a ISK to $ value added.)
+
+
+
+Current technical specs / requirements:
+- Python 2.7
+- PRAW (Python Reddit API Wrapper)
+- BeautifulSoup4
