@@ -1,0 +1,23 @@
+Notes for EKRB:
+
+
+To do list:
+  - Add Reddit interaction to script
+  - Test run in /r/Test
+  - Modify and test in /r/Eve
+  - Add to all popular Eve-related subreddits
+  - Look into into BeautifulSoup4 and Scrapy to replace regex
+  - Look into adding more features
+  
+  
+Potential added features ideas:
+  - Add more killmail websites
+  - Add real money conversion?
+  - Add PLEX conversion value?
+  - Add # of involved players?
+  - Show complete killboard info (In small text) ?
+  
+  
+Bug list:
+  - Has no working interaction with Reddit (Also it's more of lack of implentation yet than a bug)
+  - Hopefully none, haha. ;P
