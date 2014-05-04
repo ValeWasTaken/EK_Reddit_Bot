@@ -7,6 +7,7 @@ To do list:
   - Modify and test in /r/Eve
   - Add to all popular Eve-related subreddits
   - Look into into BeautifulSoup4 and Scrapy to replace regex
+  - Experiment and see how I can handle people submitting multiple killmails in one post.
   - Look into adding more features
   
   
