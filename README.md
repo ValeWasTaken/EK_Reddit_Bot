@@ -16,7 +16,6 @@ More features will be added in the future if desired. (Such as other killmail we
 Current technical specs / requirements:
 - Python 2.7
 - PRAW (Python Reddit API Wrapper)
-- 
 
 
 Please see the attached Notes.txt file for more information.
