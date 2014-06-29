@@ -1,8 +1,8 @@
-# !! Note: !! This program currently does not have Reddit interaction enabled. This is only the web-scraped information half.
+# !! Note: !! This program currently does not have Reddit interaction enabled. 
+# This is only the web-scraped information half.
 
 # EVE: Online Killmail Reddit Bot (EKRB)
 # Created by: Reddit.com/u/Valestrum
-# Contribute to the open source project here: https://github.com/ArnoldM904/EK_Reddit_Bot
 
 import urllib   # Access internet and make network requests
 import re       # Regex
@@ -38,4 +38,3 @@ def readKillmail():
         print("Value destroyed: " + str(iskDestroyed[0]))
         print("Total value: " + str(iskTotal[0]))
         print("^^This ^^bot ^^is ^^brand ^^new ^^please ^^be ^^gentle. ^^PM ^^for ^^questions.")
-
