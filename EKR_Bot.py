@@ -26,12 +26,11 @@ def readKillmail():
         iskDestroyedText = re.compile(iskDestroyedSource)
         iskTotalText = re.compile(iskTotalSource)
 
-        htmlfile = urllib.urlopen(url[i])
-        htmltext = htmlfile.read()
+        html = urllib.urlopen(url[i]).read()
 
-        iskDropped = re.findall(iskDroppedText,htmltext)
-        iskDestroyed = re.findall(iskDestroyedText,htmltext)
-        iskTotal = re.findall(iskTotalText,htmltext)
+        iskDropped = re.findall(iskDroppedText,html)
+        iskDestroyed = re.findall(iskDestroyedText,html)
+        iskTotal = re.findall(iskTotalText,html)
 
         print("Hi, I am a killmail reader bot. Let me summarize this killmail for you!")
         print("Value dropped: " + str(iskDropped[0]))
