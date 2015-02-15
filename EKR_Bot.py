@@ -23,11 +23,10 @@ def run_bot():
             comment_text = comment.body.lower()
             
             #Defines the check to see if the comment meets the criteria the bot is looking for.
-            #isMarch = (comment contains killmail link)
-            killmail = 'https://zkillboard.com/kill/38412453/' # Replace with user's link
+            killmail = [item for item in comment_text.split() if re.match(r"zkillboard\.com/kill/*", item)]
 
             #Check that comment hasn't been seen before and that it meets the desired critera.
-            if comment.id not in existing and isMatch:
+            if comment.id not in existing and killmail[0][:5] == 'zkill'::
                     existing.append(comment.id)
                     cache.write(comment.id + '\n')
                     report = read_killmail(killmail)
