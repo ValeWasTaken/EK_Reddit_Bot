@@ -2,21 +2,19 @@ Notes for EKRB:
 
 
 To do list:
-  - Add a function to find killboard URLs in comments
-  - Add an isMatch function
-  - Finish the basic form of the program
-  - Modify and test in /r/Eve
   - Add to all popular Eve-related subreddits
   - Experiment and see how I can handle people submitting multiple killmails in one post.
   - Look into adding more features
   
   
 Potential added features ideas:
+  - Display multiple killmails (if more than 3 post in pastebin?)
   - Add more killmail websites
-  - Add real money conversion?
-  - Add PLEX conversion value?
-  - Add # of involved players?
-  - Show complete killboard info (In small text) ?
+  - Add real money conversion
+  - Add PLEX conversion value
+  - Add # of involved players
+  - Show complete killboard info
+  - Add player names
   
   
 Bug list:
