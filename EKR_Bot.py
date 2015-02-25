@@ -1,39 +1,39 @@
-# !! Note: !! This program currently not finished. Please check back soon to see updates!
-
 # EVE: Online Killmail Reddit Bot (EKRB)
 
 import urllib   # Access internet and make network requests
 import re       # Regex
 import praw     # Python Reddit API Wrapper
+import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v0.5 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.0 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
-r.login('InsertUsernameHere','InsertPasswordHere')
+r.login('UsernameHere','PasswordHere')
 
 def run_bot():
     with open('cache.txt','r') as cache:
         existing = cache.read().splitlines()
 
-    subreddit = r.get_subreddit("test") # For testing only. Will eventually go to EVE subreddits.
-    print("Grabbing comments..") # For testing only to see where the program is at.
-    comments = subreddit.get_comments(limit=10)
+    subreddit = r.get_subreddit("eve")
+    print("Grabbing comments..")
+    comments = subreddit.get_comments(limit=100)
 
     with open('cache.txt', 'a+') as cache:
         for comment in comments:
+            isMatch = False
             comment_text = comment.body.lower()
-            
-            #Defines the check to see if the comment meets the criteria the bot is looking for.
-            killmail = [item for item in comment_text.split() if re.match(r"zkillboard\.com/kill/*", item)]
 
-            #Check that comment hasn't been seen before and that it meets the desired critera.
-            if comment.id not in existing and killmail[0][:5] == 'zkill'::
+            #Records any relevant URLs.
+            killmail = [item for item in comment_text.split() if re.match(r"https://zkillboard\.com/kill/*", item)]
+
+            if killmail and comment.id not in existing: #if killmail list is not empty and bot has never messaged
+                killmail = killmail[0]
+                if killmail[:13] == 'https://zkill' or killmail[:12] == 'http://zkill':
                     existing.append(comment.id)
                     cache.write(comment.id + '\n')
+                    print("I found a new comment! The ID is: " + comment.id)
                     report = read_killmail(killmail)
                     comment.reply(report)
-                    print("I found a new comment! The ID is: " + comment.id)
-            
-    print("Comment loop finished.")  # For testing only to see where the program is at.
+    print("Comment loop finished.")
 
 def read_killmail(killmail):
         url = [killmail]
@@ -42,7 +42,7 @@ def read_killmail(killmail):
         iskDestroyedSource = '<td class="item_destroyed">(.+?)</td>'
         iskTotalSource = '<strong class="item_dropped">(.+?)</strong>'
 
-        iskDroppedText = re.compile(iskDroppedSource) # Converts above regex string into something that can be interpreted by regular library
+        iskDroppedText = re.compile(iskDroppedSource) # Converts regex string into something that can be interpreted by regular library
         iskDestroyedText = re.compile(iskDestroyedSource)
         iskTotalText = re.compile(iskTotalSource)
 
@@ -53,11 +53,11 @@ def read_killmail(killmail):
         iskTotal = re.findall(iskTotalText,html)
 
         return("Hi, I am a killmail reader bot. Let me summarize this killmail for you!"
-        +"\n*Value dropped: *" + str(iskDropped[0])
-        +"\n*Value destroyed: *" + str(iskDestroyed[0])
-        +"\n*Total value: *" + str(iskTotal[0])
-        +"\n^^This ^^bot ^^is ^^brand ^^new ^^please ^^be ^^gentle. ^^PM ^^for ^^questions.")
+        +"\n\n>Value dropped: " + str(iskDropped[0])
+        +"\n\n>Value destroyed: " + str(iskDestroyed[0])
+        +"\n\n>Total value: " + str(iskTotal[0])
+        +"\n\n^^This ^^bot ^^is ^^brand ^^new ^^please ^^be ^^gentle. ^^Please ^^PM ^^with ^^suggestions!")
 
 while True:
     run_bot()
-    time.sleep(60)   
+    time.sleep(120) 
