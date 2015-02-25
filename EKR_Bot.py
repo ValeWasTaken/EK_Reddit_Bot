@@ -5,21 +5,20 @@ import re       # Regex
 import praw     # Python Reddit API Wrapper
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.0 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.1 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
+loopCount = 0
 
 def run_bot():
     with open('cache.txt','r') as cache:
         existing = cache.read().splitlines()
 
     subreddit = r.get_subreddit("eve")
-    print("Grabbing comments..")
     comments = subreddit.get_comments(limit=100)
 
     with open('cache.txt', 'a+') as cache:
         for comment in comments:
-            isMatch = False
             comment_text = comment.body.lower()
 
             #Records any relevant URLs.
@@ -33,7 +32,6 @@ def run_bot():
                     print("I found a new comment! The ID is: " + comment.id)
                     report = read_killmail(killmail)
                     comment.reply(report)
-    print("Comment loop finished.")
 
 def read_killmail(killmail):
         url = [killmail]
@@ -60,4 +58,6 @@ def read_killmail(killmail):
 
 while True:
     run_bot()
-    time.sleep(120) 
+    loopCount += 1
+    print("Program loop #"+str(loopCount)+" completed successfully.")
+    time.sleep(1200)
