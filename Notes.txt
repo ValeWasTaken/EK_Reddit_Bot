@@ -2,6 +2,7 @@ Notes for EKRB:
 
 
 To do list:
+  - Replace re with BS4
   - Add ISK to $ conversion
   - Add link to kill
   - Add pilot info (ship, name, corp, alliance) for victim and killing blow
