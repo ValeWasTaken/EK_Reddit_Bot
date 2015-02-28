@@ -4,7 +4,6 @@ Notes for EKRB:
 To do list:
   - Add ISK to $ conversion
   - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
-  - Add to all popular Eve-related subreddits
   - Add support for 1v1 kills
   - Look into adding more features
   
@@ -14,6 +13,8 @@ Potential added features ideas:
   - Add link to kill
   - Add hover-to-view format
   - Add PLEX conversion value
+  - - Add to all popular Eve-related subreddits
+  - Round ISK (Ex: 123,456,789.00 ISK -> 123.46m ISK)
   
   
 Bug list:
