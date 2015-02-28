@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.1 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.5 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -15,7 +15,7 @@ def run_bot():
     with open('cache.txt','r') as cache:
         existing = cache.read().splitlines()
 
-    subreddit = r.get_subreddit("test")
+    subreddit = r.get_subreddit("eve")
     comments = subreddit.get_comments(limit=150)
 
     with open('cache.txt', 'a+') as cache:
@@ -43,7 +43,19 @@ def read_killmail(killmails):
             iskDropped = soup.find("td", class_="item_dropped").get_text()
             iskDestroyed = soup.find("td", class_="item_destroyed").get_text()
             iskTotal = soup.find("strong", class_="item_dropped").get_text()
-            replyData.append("\n\n>Value dropped: " + str(iskDropped) +"\n\n>Value destroyed: " + str(iskDestroyed) +"\n\n>Total value: " + str(iskTotal)+'\n\n'+('-'*20))
+            
+            #v = victim, kb = pilot firing killing blow
+            vPilotName = soup.table.table.tr.a.get('title')
+            vShipType = (''.join(((soup.find("td", style="width: 100%").get_text())).split())) # Ex: Leviathan(Titan)
+            #Add v corp and alliance here
+            kbShipType = soup.find_all('tr', class_="attacker")[0].find_all('a', href=re.compile('/ship/'))[0].img.get('alt') #Ex: Nyx
+            kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
+            #Add kb corp and alliance here
+            system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
+            otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
+            
+            replyData.append("\n\n>A %s piloted by %s was destroyed in system %s by %s flying a %s along with %s others." % (vShipType,vPilotName,system,kbPilotName,kbShipType,otherPilots)
+                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n" % (iskDropped,iskDestroyed,iskTotal)+('-'*50))
         replyData = ('\n\n'.join(replyData))
 
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
