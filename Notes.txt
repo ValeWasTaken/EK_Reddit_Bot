@@ -5,6 +5,7 @@ To do list:
   - Add ISK to $ conversion
   - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
   - Add to all popular Eve-related subreddits
+  - Add support for 1v1 kills
   - Look into adding more features
   
   
@@ -16,4 +17,4 @@ Potential added features ideas:
   
   
 Bug list:
-  - Hopefully none, haha. ;P
+  - Crashes when it comes across a killmail with only one attacker
