@@ -3,19 +3,16 @@ Notes for EKRB:
 
 To do list:
   - Add ISK to $ conversion
-  - Add link to kill
-  - Add pilot info (ship, name, corp, alliance) for victim and killing blow
-  - Add system kill happened in
+  - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
   - Add to all popular Eve-related subreddits
   - Look into adding more features
   
   
 Potential added features ideas:
   - Add more killmail websites
+  - Add link to kill
   - Add hover-to-view format
   - Add PLEX conversion value
-  - Add # of involved players
-  - Add player names
   
   
 Bug list:
