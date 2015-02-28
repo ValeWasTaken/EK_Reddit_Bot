@@ -60,7 +60,7 @@ def read_killmail(killmails):
 
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
         +str(replyData)
-        +"\n\n^^This ^^bot ^^is ^^brand ^^new ^^please ^^be ^^gentle ^^and ^^PM ^^with ^^suggestions!")
+        +"\n\n^^This ^^bot ^^is ^^open ^^source ^^and ^^in ^^development! ^^Please ^^feel ^^free ^^to ^^contribute ^^[here](https://github.com/ArnoldM904/EK_Reddit_Bot) ^^and/or ^^PM ^^with ^^suggestions!")
 
 while True:
     run_bot()
