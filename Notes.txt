@@ -2,18 +2,15 @@ Notes for EKRB:
 
 
 To do list:
-  - Replace re with BS4
   - Add ISK to $ conversion
   - Add link to kill
   - Add pilot info (ship, name, corp, alliance) for victim and killing blow
   - Add system kill happened in
   - Add to all popular Eve-related subreddits
-  - Experiment and see how I can handle people submitting multiple killmails in one post.
   - Look into adding more features
   
   
 Potential added features ideas:
-  - Display multiple killmails (if more than 3 post in pastebin?)
   - Add more killmail websites
   - Add hover-to-view format
   - Add PLEX conversion value
