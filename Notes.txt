@@ -5,6 +5,7 @@ To do list:
   - Fix killing blow name bug
   - Fix date bug
   - Add sec-status
+  - Add support for threads links (instead of just comments)
   - Abbreviate & round ISK values to millions
   - Add hover-to-view format
   - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
