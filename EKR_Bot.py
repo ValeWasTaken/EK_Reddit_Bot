@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.6 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.7 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -54,9 +54,10 @@ def read_killmail(killmails):
             kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
             #Add kb corp and alliance here
             system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
+            date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
             otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
             
-            replyData.append("\n\n>A %s piloted by %s was destroyed in system %s by %s flying a %s along with %s others." % (vShipType,vPilotName,system,kbPilotName,kbShipType,otherPilots)
+            replyData.append("\n\n>On %s a %s piloted by %s was destroyed in system %s by %s flying a %s along with %s others." % (date,vShipType,vPilotName,system,kbPilotName,kbShipType,otherPilots)
                     +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vRiggingText,vRiggingLink)+('-'*50))
         replyData = ('\n\n'.join(replyData))
 
