@@ -2,7 +2,7 @@ Notes for EKRB:
 
 
 To do list:
-  - Add ISK to $ conversion
+  - Fix killing blow name bug
   - Add hover-to-view format
   - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
   - Add support for 1v1 kills
@@ -11,6 +11,7 @@ To do list:
   
 Potential added features ideas:
   - Add more killmail websites
+  - Add ISK to $ conversion
   - Add link to kill
   - Add PLEX conversion value
   - Add to all popular Eve-related subreddits
@@ -19,3 +20,4 @@ Potential added features ideas:
   
 Bug list:
   - Crashes when it comes across a killmail with only one attacker
+  - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
