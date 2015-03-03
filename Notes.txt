@@ -3,6 +3,8 @@ Notes for EKRB:
 
 To do list:
   - Fix killing blow name bug
+  - Fix date bug
+  - Abbreviate & round ISK values to millions
   - Add hover-to-view format
   - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
   - Add support for 1v1 kills
@@ -15,9 +17,9 @@ Potential added features ideas:
   - Add link to kill
   - Add PLEX conversion value
   - Add to all popular Eve-related subreddits
-  - Round ISK (Ex: 123,456,789.00 ISK -> 123.46m ISK)
   
   
 Bug list:
   - Crashes when it comes across a killmail with only one attacker
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
+  - If the killmail does not have all parameters (ex: "Related: Capsule") then the date will return incorrectly
