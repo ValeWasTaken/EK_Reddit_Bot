@@ -8,8 +8,7 @@ To do list:
   - Add support for threads links (instead of just comments)
   - Abbreviate & round ISK values to millions
   - Add hover-to-view format
-  - Add more pilot info (corp + alliance) for victim and pilot scoring the killing blow
-  - Add support for 1v1 kills
+  - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Look into adding more features
   
   
@@ -22,6 +21,5 @@ Potential added features ideas:
   
   
 Bug list:
-  - Crashes when it comes across a killmail with only one attacker
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
   - If the killmail does not have all parameters (ex: "Related: Capsule") then the date will return incorrectly
