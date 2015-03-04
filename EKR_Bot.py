@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.8 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.85 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -46,6 +46,8 @@ def read_killmail(killmails):
 
             system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
             date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
+            if len(date) < 6:
+                    date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[2].get_text()[:10]
             otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
             
             #v = victim, kb = pilot firing killing blow
@@ -53,7 +55,7 @@ def read_killmail(killmails):
             vPilotName = vPilotInfo[0]
             if len(vPilotInfo) > 1:
                     vCorp = vPilotInfo[1]
-                    if len(vPilotInfo) > 3: # This accounts for extra variable '' mistakes and such.
+                    if len(vPilotInfo) > 3: # This accounts for extra variable '' added to PilotInfo
                             vAlliance = vPilotInfo[2]
                     else:
                             vAlliance = '<No Alliance>'
@@ -70,7 +72,7 @@ def read_killmail(killmails):
                     kbPilotName = kbPilotInfo[0]
                     if len(kbPilotInfo) > 1:
                             kbCorp = kbPilotInfo[1]
-                            if len(kbPilotInfo) >= 3:
+                            if len(kbPilotInfo) > 3:
                                     kbAlliance = kbPilotInfo[2][:-1] # For some reason an extra space kept being added at the end.
                             else:
                                     kbAlliance = '<No Alliance>'
