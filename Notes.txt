@@ -3,7 +3,6 @@ Notes for EKRB:
 
 To do list:
   - Fix killing blow name bug
-  - Fix date bug
   - Add sec-status
   - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
@@ -23,4 +22,3 @@ Potential added features ideas:
   
 Bug list:
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
-  - If the killmail does not have all parameters (ex: "Related: Capsule") then the date will return incorrectly
