@@ -5,6 +5,7 @@ To do list:
   - Fix killing blow name bug
   - Fix date bug
   - Add sec-status
+  - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
   - Abbreviate & round ISK values to millions
   - Add hover-to-view format
