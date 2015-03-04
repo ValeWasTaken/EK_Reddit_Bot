@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.7 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.8 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -43,22 +43,46 @@ def read_killmail(killmails):
             iskDropped = soup.find("td", class_="item_dropped").get_text()
             iskDestroyed = soup.find("td", class_="item_destroyed").get_text()
             iskTotal = soup.find("strong", class_="item_dropped").get_text()
-            
-            #v = victim, kb = pilot firing killing blow
-            vPilotName = soup.table.table.tr.a.get('title')
-            vShipType = (''.join(((soup.find("td", style="width: 100%").get_text())).split())) # Ex: Leviathan(Titan)
-            vRiggingText = soup.find_all('ul', class_="dropdown-menu")[3].find('a').get_text()
-            vRiggingLink = soup.find_all('ul', class_="dropdown-menu")[3].find_all('a', href=re.compile('/o.smium.org/loadout/'))[0]['href']
-            #Add v corp and alliance here
-            kbShipType = soup.find_all('tr', class_="attacker")[0].find_all('a', href=re.compile('/ship/'))[0].img.get('alt') #Ex: Nyx
-            kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
-            #Add kb corp and alliance here
+
             system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
             date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
             otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
             
-            replyData.append("\n\n>On %s a %s piloted by %s was destroyed in system %s by %s flying a %s along with %s others." % (date,vShipType,vPilotName,system,kbPilotName,kbShipType,otherPilots)
-                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vRiggingText,vRiggingLink)+('-'*50))
+            #v = victim, kb = pilot firing killing blow
+            vPilotInfo = soup.find("table", class_="table table-condensed").find_all('td')[2].get_text().split('\n\n')
+            vPilotName = vPilotInfo[0]
+            if len(vPilotInfo) > 1:
+                    vCorp = vPilotInfo[1]
+                    if len(vPilotInfo) > 3: # This accounts for extra variable '' mistakes and such.
+                            vAlliance = vPilotInfo[2]
+                    else:
+                            vAlliance = '<No Alliance>'
+            else:
+                    vCorp = '<No Corp>'
+                    vAlliance = '<No Alliance>'
+            vShipType = (''.join(((soup.find("td", style="width: 100%").get_text())).split())) # Ex: Leviathan(Titan)
+            vRiggingText = soup.find_all('ul', class_="dropdown-menu")[3].find('a').get_text()
+            vRiggingLink = soup.find_all('ul', class_="dropdown-menu")[3].find_all('a', href=re.compile('/o.smium.org/loadout/'))[0]['href']
+            
+            kbShipType = soup.find_all('tr', class_="attacker")[0].find_all('a', href=re.compile('/ship/'))[0].img.get('alt') #Ex: Nyx
+            if int(otherPilots) == 0:
+                    kbPilotInfo = soup.find('div', class_="hidden-sm hidden-md hidden-xs").get_text().split('\n\n')
+                    kbPilotName = kbPilotInfo[0]
+                    if len(kbPilotInfo) > 1:
+                            kbCorp = kbPilotInfo[1]
+                            if len(kbPilotInfo) >= 3:
+                                    kbAlliance = kbPilotInfo[2][:-1] # For some reason an extra space kept being added at the end.
+                            else:
+                                    kbAlliance = '<No Alliance>'
+                    else:
+                            kbCorp = '<No Corp>'
+                            kbAlliance = '<No Alliance>'
+                    replyData.append("\n\n>On %s a %s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a %s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbCorp,kbAlliance,kbShipType,otherPilots)
+                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
+            else:
+                    kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
+                    replyData.append("\n\n>On %s a %s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a %s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots)
+                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
         replyData = ('\n\n'.join(replyData))
 
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
