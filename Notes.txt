@@ -8,12 +8,12 @@ To do list:
   - Add support for threads links (instead of just comments)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
+  - Add ISK to real money conversion
   - Look into adding more features
   
   
 Potential added features ideas:
   - Add more killmail websites
-  - Add ISK to $ conversion
   - Add link to kill
   - Add PLEX conversion value
   - Add to all popular Eve-related subreddits
