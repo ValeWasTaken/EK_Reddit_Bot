@@ -6,7 +6,6 @@ To do list:
   - Add sec-status
   - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
-  - Abbreviate & round ISK values to millions
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Look into adding more features
