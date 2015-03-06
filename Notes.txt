@@ -2,7 +2,10 @@ Notes for EKRB:
 
 
 To do list:
-  - Fix killing blow name bug
+  - Fix killing blow name bug (with NPCs)
+  - Add statements to convert "a" to "an" when appropriate
+  - Add statements to convert "others" to "other" when appropriate
+  - Add statements to convert "system X" to "the X system" when appropriate
   - Add sec-status
   - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
@@ -13,6 +16,8 @@ To do list:
   
   
 Potential added features ideas:
+  - Add hover-to-view fitting info (with fitting link as display text perhaps?)
+  - Rewrite signature to include donation info
   - Add more killmail websites
   - Add link to kill
   - Add PLEX conversion value
