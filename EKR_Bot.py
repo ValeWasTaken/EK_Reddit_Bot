@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.85 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.9 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -43,6 +43,26 @@ def read_killmail(killmails):
             iskDropped = soup.find("td", class_="item_dropped").get_text()
             iskDestroyed = soup.find("td", class_="item_destroyed").get_text()
             iskTotal = soup.find("strong", class_="item_dropped").get_text()
+            
+            dropRounded = (int((iskDropped)[:-7].replace(',','')) / 1000000.0)
+            destroyedRounded = (int((iskDestroyed)[:-7].replace(',','')) / 1000000.0)
+            totalRounded = (int((iskTotal)[:-7].replace(',','')) / 1000000.0)
+            
+            if dropRounded > 1000:
+                    dropRounded /= 1000
+                    iskDropped = ('%.2f billion ISK') % dropRounded
+            else:
+                    iskDropped = ('%.2f million ISK') % dropRounded
+            if destroyedRounded > 1000:
+                    destroyedRounded /= 1000
+                    iskDestroyed = ('%.2f billion ISK') % destroyedRounded
+            else:
+                    iskDestroyed = ('%.2f million ISK') % destroyedRounded
+            if totalRounded > 1000:
+                    totalRounded /= 1000
+                    iskTotal = ('%.2f billion ISK') % totalRounded
+            else:
+                    iskTotal = ('%.2f million ISK') % totalRounded
 
             system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
             date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
