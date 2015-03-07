@@ -121,7 +121,7 @@ def read_killmail(killmails):
 
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
         +str(replyData)
-        +"\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active ^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^[Suggestions](%s) ^^| ^^[Code](%s) ^^| ^^[ISK](%s) ^^| ^^[Love](%s)") % ('http://www.reddit.com/message/compose?to=Killmail_Bot','https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py','http://evewho.com/pilot/Valestrum+Vos','http://www.reddit.com/message/compose?to=Killmail_Bot')
+        +"\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active ^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^[Suggestions](%s) ^^| ^^[Code](%s) ^^| ^^[ISK](%s)") % ('http://www.reddit.com/message/compose?to=Killmail_Bot','https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py','http://evewho.com/pilot/Valestrum+Vos')
 
 while True:
     run_bot()
