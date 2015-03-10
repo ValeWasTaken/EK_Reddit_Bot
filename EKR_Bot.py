@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.92 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.93 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -108,15 +108,14 @@ def read_killmail(killmails):
                     else:
                             kbCorp = '<No Corp>'
                             kbAlliance = '<No Alliance>'
-                    replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbCorp,kbAlliance,kbShipType,otherPilots)
-                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
+                    replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbCorp,kbAlliance,kbShipType,otherPilots))
             else:
                     kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
                     if int(otherPilots) == 1:
                             replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s other." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots))
                     else:
-                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots)
-                    +"\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
+                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots))
+            replyData.append("\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
         replyData = ('\n\n'.join(replyData))
 
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
