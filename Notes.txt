@@ -10,6 +10,7 @@ To do list:
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add ISK to real money conversion
+  - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
   - Look into adding more features
   
   
