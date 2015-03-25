@@ -24,3 +24,4 @@ Potential added features ideas:
   
 Bug list:
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
+  - Bot does not handle NPC / structure deaths well, needs adjusting. Ex: (https://zkillboard.com/kill/45500149/)
