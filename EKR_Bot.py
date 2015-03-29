@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.94 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.941 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -17,7 +17,7 @@ def condense_value(num, suffix='ISK'):
     else:
         for unit in ['','thousand','million','billion','trillion']:
             if abs(num) < 1000.0:
-                return "%3.3f %s %s" % (num, unit, suffix)
+                return "%.2f %s %s" % (num, unit, suffix)
             num /= 1000.0
 
 def run_bot():
