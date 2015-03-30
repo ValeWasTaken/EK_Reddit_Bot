@@ -16,9 +16,6 @@ To do list:
   
 Potential added features ideas:
   - Add hover-to-view fitting info (with fitting link as display text perhaps?)
-  - Add more killmail websites
-  - Add link to kill
-  - Add PLEX conversion value
   - Add to all popular Eve-related subreddits
   
   
