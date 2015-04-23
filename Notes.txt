@@ -2,14 +2,13 @@ Notes for EKRB:
 
 
 To do list:
-  - Fix killing blow name bug (with NPCs)
+  - Fix bugs
   - Add statements to convert "system X" to "the X system" when appropriate
   - Add sec-status
   - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
-  - Add ISK to real money conversion
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
   - Look into adding more features
   
