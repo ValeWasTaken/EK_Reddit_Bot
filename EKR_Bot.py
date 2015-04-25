@@ -58,7 +58,7 @@ def read_killmail(killmails):
             date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
             if len(date) < 6:
                     date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[2].get_text()[:10]
-            otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
+            #otherPilots = int(str(soup.find("th", class_="hidden-md hidden-xs").get_text())[:-9])-1 #Ex: '44' out of "45 Involved", excluded 1 being kb
             
             #v = victim, kb = pilot firing killing blow
             vPilotInfo = soup.find("table", class_="table table-condensed").find_all('td')[2].get_text().split('\n\n')
@@ -98,13 +98,13 @@ def read_killmail(killmails):
                     else:
                             kbCorp = '<No Corp>'
                             kbAlliance = '<No Alliance>'
-                    replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbCorp,kbAlliance,kbShipType,otherPilots))
+                    replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbCorp,kbAlliance,kbShipType))
             else:
                     kbPilotName = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
                     if int(otherPilots) == 1:
-                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s other." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots))
+                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType))
                     else:
-                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s others." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType,otherPilots))
+                            replyData.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s." % (date,vShipType,vPilotName,vCorp,vAlliance,system,kbPilotName,kbShipType))
             replyData.append("\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (iskDropped,iskDestroyed,iskTotal,vPilotName,vRiggingText,vRiggingLink)+('-'*50))
         replyData = ('\n\n'.join(replyData))
 
