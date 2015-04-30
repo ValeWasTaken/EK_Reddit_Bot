@@ -54,7 +54,7 @@ def read_killmail(killmails):
             iskTotal = soup.find("strong", class_="item_dropped").get_text()
             iskDropped, iskDestroyed, iskTotal = [condense_value(int(value[:-7].replace(',',''))) for value in [iskDropped, iskDestroyed, iskTotal]]
 
-            system = soup.find_all('a', href=re.compile('/system/'))[0].get_text() #Ex: Iralaja
+            system = soup.find_all('a', href=re.compile('/system/'))[1].get_text() #Ex: Iralaja
             date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[3].get_text()[:10]
             if len(date) < 6:
                     date = soup.find("table", class_="table table-condensed table-striped table-hover").find_all('td')[2].get_text()[:10]
