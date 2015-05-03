@@ -6,7 +6,7 @@ import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
 import time
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.942 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.943 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -114,7 +114,12 @@ def read_killmail(killmails):
         +"\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active ^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^[Suggestions](%s) ^^| ^^[Code](%s)") % ('http://www.reddit.com/message/compose?to=Killmail_Bot','https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py')
 
 while True:
-    run_bot()
+    try:
+        run_bot()
+    except ConnectionError as e:
+        print e
+        time.sleep(60)
+        run_bot()
     loopCount += 1
     print("Program loop #"+str(loopCount)+" completed successfully.")
     time.sleep(1200)
