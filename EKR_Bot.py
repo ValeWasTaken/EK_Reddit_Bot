@@ -4,9 +4,10 @@ import urllib   # Access internet and make network requests
 import re       # Regex
 import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
-import time
+import time     # Timer for running the bot every set amount of time
+import requests # Allows for catching ConnectionErrors and rerunning the program.
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.943 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.944 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loopCount = 0
@@ -116,7 +117,7 @@ def read_killmail(killmails):
 while True:
     try:
         run_bot()
-    except ConnectionError as e:
+    except requests.ConnectionError as e:
         print e
         time.sleep(60)
         run_bot()
