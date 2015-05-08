@@ -13,7 +13,7 @@ To do list:
   - Look into adding more features
   
   
-Potential added features ideas:
+Potential feature ideas:
   - Add hover-to-view fitting info (with fitting link as display text perhaps?)
   - Add to all popular Eve-related subreddits
   
@@ -21,4 +21,4 @@ Potential added features ideas:
 Bug list:
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
   - Bot does not handle NPC / structure deaths well, needs adjusting. Ex: (https://zkillboard.com/kill/45500149/)
-  - Bot sometimes reports incorrect killer's ship type Ex: (https://zkillboard.com/kill/45107784/) reports a Manticore instead of a Tengu
+  - Bot sometimes reports incorrect killer's ship type Ex: (https://zkillboard.com/kill/45107784/) reports a Manticore instead of a Tengu.
