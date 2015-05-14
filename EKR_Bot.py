@@ -47,7 +47,7 @@ def run_bot():
                 comment.reply(report)
 
 def read_killmail(killmails):
-        replyData = []
+        reply_data = []
         for url in killmails:
             soup = BeautifulSoup(urllib.urlopen(url).read())
             isk_dropped = soup.find("td", class_="item_dropped").get_text()
