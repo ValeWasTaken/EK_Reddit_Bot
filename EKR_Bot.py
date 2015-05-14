@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup # Web scraping
 import time     # Timer for running the bot every set amount of time
 import requests # Allows for catching ConnectionErrors and rerunning the program.
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.944 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.945 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loop_count = 0
@@ -38,7 +38,7 @@ def run_bot():
             if killmails and comment.id not in existing: #if killmail list is not empty and bot has never messaged
                 mails = []
                 for mail in killmails:
-                    if mail[:13] == 'https://zkill' or mail[:12] == 'http://zkill':
+                    if mail.startswith('https://zkill') or mail.startswith('http://zkill'):
                         mails.append(str(mail))
                 existing.append(comment.id)
                 cache.write(comment.id + '\n')
