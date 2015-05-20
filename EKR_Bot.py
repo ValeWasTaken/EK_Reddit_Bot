@@ -1,18 +1,23 @@
 # EVE: Online Killmail Reddit Bot (EKRB)
 
-import urllib   # Access internet and make network requests
-import re       # Regex
-import praw     # Python Reddit API Wrapper
 from bs4 import BeautifulSoup # Web scraping
-import time     # Timer for running the bot every set amount of time
+import praw	# Python Reddit API Wrapper
+import re       # Regex
 import requests # Allows for catching ConnectionErrors and rerunning the program.
+import time     # Timer for running the bot every set amount of time
+import urllib	# Access internet and make network requests
 
-r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.945 - Created by /u/Valestrum '
+r = praw.Reddit(user_agent='EVE: Online Killmail Reader Bot v1.950 - Created by /u/Valestrum '
                                 'Designed to help users get killmail info without clicking links.')
 r.login('UsernameHere','PasswordHere')
 loop_count = 0
 
 def condense_value(num, suffix='ISK'):
+    '''
+        condense_vale() condenses the ISK (EVE-online currency) values from
+        Examples such as: "123,456,789.00 ISK"
+        Into neater forms such as: "123.46 million ISK"
+    '''
     if num > 999999999999999:
         return("%s %s") % (num,suffix)
     else:
@@ -22,9 +27,22 @@ def condense_value(num, suffix='ISK'):
             num /= 1000.0
 
 def run_bot():
+    '''
+        run_bot() consists of 7 main parts that push the bot through its main processes.
+
+        Part 1. Open and read cache file of recorded comments replied to.
+        Part 2. Go to subreddit /r/eve and check the latest 150 comments.
+        Part 3. Find comments containing zkillboard.com links and set them apart.
+        Part 4. Check that killmails is not empty and comments have not already been replied to using the cache.
+        Part 5. Save comment ID into cache.
+        Part 6. Send zkillboard URL into read_killmail()
+        Part 7. Reply to comment. 
+    '''
+    # Part 1
     with open('cache.txt','r') as cache:
         existing = cache.read().splitlines()
 
+    # Part 2
     subreddit = r.get_subreddit("eve")
     comments = subreddit.get_comments(limit=150)
 
@@ -32,23 +50,43 @@ def run_bot():
         for comment in comments:
             comment_text = comment.body.lower()
 
-            #Records any relevant URLs.
+            # Part 3
             killmails = [item for item in comment_text.split() if re.match(r"https://zkillboard\.com/kill/*", item)]
 
-            if killmails and comment.id not in existing: #if killmail list is not empty and bot has never messaged
+	    # Part 4
+            if killmails and comment.id not in existing:
                 mails = []
                 for mail in killmails:
+                    # Check that the end of the killmail URL is not corrupted. (IE: Prevent 'zkillboard.com/kill/123.') from crashing the program.
                     if mail.startswith('https://zkill') or mail.startswith('http://zkill'):
-                        mails.append(str(mail))
+                        if mail[-1:] in '1234567890/':
+                            mails.append(mail)
                 existing.append(comment.id)
+                # Part 5
                 cache.write(comment.id + '\n')
                 print("I found a new comment! The ID is: " + comment.id)
+                # Part 6
                 report = read_killmail(mails)
+                # Part 7
                 comment.reply(report)
 
+def startswith_vowel(string):
+	return string.lower()[0] in 'aeiou'
+
 def read_killmail(killmails):
+        '''
+            read_killmail() consists of 4 main parts that serve to scrape zkillboard.com
+            and then return the information in a way that is suited for a Reddit comment.
+
+            Part 1 - Cycle through the killmail(s)
+            Part 2 - Scrape the "TL;DR" of their information
+            Part 3 - Append it all into a string using Reddit-friendly syntax
+            Part 4 - Return the correctly formatted string with scraped information to be used in the reply comment.
+        '''
         reply_data = []
+        # Part 1
         for url in killmails:
+            # Part 2
             soup = BeautifulSoup(urllib.urlopen(url).read())
             isk_dropped = soup.find("td", class_="item_dropped").get_text()
             isk_destroyed = soup.find("td", class_="item_destroyed").get_text()
@@ -75,18 +113,18 @@ def read_killmail(killmails):
                     v_alliance = '<No Alliance>'
                     
             v_ship_type = (''.join(((soup.find("td", style="width: 100%").get_text())).split())) # Ex: Leviathan(Titan)
-            if v_ship_type[0].lower() in 'aeiou':
-                    v_ship_type = 'n '+str(v_ship_type)
+            if startswith_vowel(v_ship_type):
+                    v_ship_type = 'n ' + v_ship_type
             else:
-                    v_ship_type = ' '+str(v_ship_type)
+                    v_ship_type = ' ' + v_ship_type
             v_rigging_text = soup.find_all('ul', class_="dropdown-menu")[3].find('a').get_text()
             v_rigging_link = soup.find_all('ul', class_="dropdown-menu")[3].find_all('a', href=re.compile('/o.smium.org/loadout/'))[0]['href']
             
             kb_ship_type = soup.find_all('tr', class_="attacker")[0].find_all('a', href=re.compile('/ship/'))[0].img.get('alt') #Ex: Nyx
-            if kb_ship_type[0].lower() in 'aeiou':
-                    kb_ship_type = 'n '+str(kb_ship_type)
+            if startswith_vowel(kb_ship_type):
+                    kb_ship_type = 'n ' + kb_ship_type
             else:
-                    kb_ship_type = ' '+str(kb_ship_type)
+                    kb_ship_type = ' ' + kb_ship_type
             if int(other_pilots) == 0:
                     kb_pilot_info = soup.find('div', class_="hidden-sm hidden-md hidden-xs").get_text().split('\n\n')
                     kb_pilot_name = kb_pilot_info[0]
@@ -99,19 +137,29 @@ def read_killmail(killmails):
                     else:
                             kb_corp = '<No Corp>'
                             kb_alliance = '<No Alliance>'
-                    reply_data.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s along with %s others." % (date,v_ship_type,v_pilot_name,v_corp,v_alliance,system,kb_pilot_name,kb_corp,kb_alliance,kb_ship_type,other_pilots))
+                    # Part 3
+                    reply_data.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s of (%s | %s) flying a%s along with %s others."
+                                      % (date, v_ship_type, v_pilot_name, v_corp, v_alliance, system, kb_pilot_name, kb_corp, kb_alliance, kb_ship_type, other_pilots))
             else:
                     kb_pilot_name = soup.find_all('td', style="text-align: center;")[0].find_all('a', href=re.compile('/character/'))[0].img.get('alt')
+                    people_data = ("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s other"
+                                   % (date, v_ship_type, v_pilot_name, v_corp, v_alliance, system, kb_pilot_name, kb_ship_type, other_pilots))
                     if int(other_pilots) == 1:
-                            reply_data.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s other." % (date,v_ship_type,v_pilot_name,v_corp,v_alliance,system,kb_pilot_name,kb_ship_type,other_pilots))
+                            people_data += "."
                     else:
-                            reply_data.append("\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in system %s by %s flying a%s along with %s others." % (date,v_ship_type,v_pilot_name,v_corp,v_alliance,system,kb_pilot_name,kb_ship_type,other_pilots))
-            reply_data.append("\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n" % (isk_dropped,isk_destroyed,isk_total,v_pilot_name,v_rigging_text,v_rigging_link)+('-'*50))
+                            people_data += "s."
+                    reply_data.append(people_data)
+            reply_data.append("\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: %s\n\n>[%s's %s](%s)\n\n"
+                              % (isk_dropped, isk_destroyed, isk_total, v_pilot_name, v_rigging_text, v_rigging_link) + ('-'*50))
         reply_data = ('\n\n'.join(reply_data))
-
+        
+        # Part 4
+        msg_bot_link = 'http://www.reddit.com/message/compose?to=Killmail_Bot'
+        github_link = 'https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py'
+        
         return("Hi, I am a killmail reader bot. Let me summarize killmail for you!"
-        +str(reply_data)
-        +"\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active ^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^[Suggestions](%s) ^^| ^^[Code](%s)") % ('http://www.reddit.com/message/compose?to=Killmail_Bot','https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py')
+        + reply_data
+        +"\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active ^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^[Suggestions](%s) ^^| ^^[Code](%s)") % (msg_bot_link, github_link)
 
 while True:
     try:
