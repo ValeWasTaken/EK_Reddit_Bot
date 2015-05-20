@@ -5,7 +5,7 @@ EVE: Online Killmail Reddit Bot (EKRB)
 
 EKRB is a web-scraping bot that searches the /r/eve sub-reddit for posts containing killmail links before posting a reply to said post with the "TL;DR" of the killmail. This bot is primarily for mobile phone / tablet users who would otherwise be too inconvienced to view a killmail link or links, users with low connection speeds who load killmail pages very slowly, and lazy PC users who would rather quickly see the gist of the information rather than clicking 10 different links alike. EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
 
-Version 1.943 supports zkillboard and posts the following information:
+Version 1.950 supports zkillboard and posts the following information:
 - ISK Dropped
 - ISK Destroyed
 - Total ISK
