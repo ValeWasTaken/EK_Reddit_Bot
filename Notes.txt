@@ -20,7 +20,6 @@ Potential feature ideas:
   
   
 Bug list:
-  - Periods at the end of a killmail link (Ex: "https://zkillboard.com/kill/45107784/.") break the bot.
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
   - Bot does not handle NPC / structure deaths well, needs adjusting. Ex: (https://zkillboard.com/kill/45500149/)
   - Bot sometimes reports incorrect killer's ship type Ex: (https://zkillboard.com/kill/45107784/) reports a Manticore instead of a Tengu.
