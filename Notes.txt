@@ -3,7 +3,6 @@ Notes for EKRB:
 
 To do list:
   - Fix bugs
-  - Format code to fit PEP-8 standards
   - Add statements to convert "system X" to "the X system" when appropriate
   - Add sec-status
   - Add pilot information with top damage
