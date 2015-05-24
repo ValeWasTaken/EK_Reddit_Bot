@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader Bot v1.950'
+    user_agent='EVE: Online Killmail Reader Bot v1.951'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking'
                'links.')
@@ -201,9 +201,9 @@ def read_killmail(killmails):
                     v_alliance, system, kb_pilot_name,
                     kb_ship_type, other_pilots))
             if int(other_pilots) == 1:
-                    people_data += "."
+                people_data += "."
             else:
-                    people_data += "s."
+                people_data += "s."
             reply_data.append(people_data)
         reply_data.append(
             "\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: "
