@@ -21,3 +21,5 @@ Screenshot example:
 
 More features will be added in the future if desired.
 Please see the attached <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/Notes.txt">Notes.txt</a> file for more information.
+
+To begin contributing see: <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/How_to_contribute.md">How_to_contribute.md</a> !
