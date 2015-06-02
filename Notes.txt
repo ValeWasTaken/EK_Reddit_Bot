@@ -10,12 +10,14 @@ To do list:
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
+  - Add support for posting 1b+ killmails on /r/zkillboard
   - Look into adding more features
   
   
 Potential feature ideas:
   - Add hover-to-view fitting info (with fitting link as display text perhaps?)
   - Add to all popular Eve-related subreddits
+  - After adding support for posting 1b+ kills on /r/zkillboard make a master post to frequently edit & log all kills
   
   
 Bug list:
