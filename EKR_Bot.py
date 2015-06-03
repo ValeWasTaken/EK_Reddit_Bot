@@ -116,14 +116,7 @@ def read_killmail(killmails):
 
         system = soup.find_all('a', href=re.compile('/system/'))
         system = system[1].get_text()  # Ex: Iralaja
-
-        date_class = "table table-condensed table-striped table-hover"
-        date = soup.find("table", class_=date_class)
-        date = date.find_all('td')[3].get_text()[:10]
-
-        if len(date) < 6:
-            date = soup.find("table", class_=date_class)
-            date = date.find_all('td')[2].get_text()[:10]
+        date = soup.find('td', class_="info_kill_dttm").get_text()[:10]
 
         # Ex: '44' out of "45 Involved", excluded 1 being kb
         pilot_class = "hidden-md hidden-xs"
