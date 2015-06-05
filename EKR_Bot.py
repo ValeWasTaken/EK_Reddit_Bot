@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB)
+# EVE: Online Killmail Reddit Bot (EKRB) - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -32,7 +32,8 @@ def condense_value(num, suffix='ISK'):
 
 
 def run_bot():
-    ''' run_bot() consists of 7 main parts that push the bot through its main
+    ''' 
+        run_bot() consists of 7 main parts that push the bot through its main
         processes.
 
         Part 1. Open and read cache file of recorded comments replied to.
@@ -91,7 +92,8 @@ def startswith_vowel(string):
 
 
 def read_killmail(killmails):
-    ''' read_killmail() consists of 4 main parts that serve to scrape
+    ''' 
+        read_killmail() consists of 4 main parts that serve to scrape
         zkillboard.com and then return the information in a way that is
         suited for a Reddit comment.
 
