@@ -10,7 +10,8 @@ To do list:
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
-  - Add support for posting 1b+ killmails on /r/zkillboard
+  - Add support for posting 30b+ killmails on /r/zkillboard and /r/eve [In-progress]
+  - Merge said posting support to interact with the EKR_Bot.py file.
   - Look into adding more features
   
   
