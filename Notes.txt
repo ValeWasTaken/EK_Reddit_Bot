@@ -5,7 +5,6 @@ To do list:
   - Fix bugs
   - Add statements to convert "system X" to "the X system" when appropriate
   - Add sec-status
-  - Add pilot information with top damage
   - Add support for threads links (instead of just comments)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
@@ -17,7 +16,6 @@ To do list:
 Potential feature ideas:
   - Add hover-to-view fitting info (with fitting link as display text perhaps?)
   - Add to all popular Eve-related subreddits
-  - After adding support for posting 1b+ kills on /r/zkillboard make a master post to frequently edit & log all kills
   
   
 Bug list:
