@@ -19,6 +19,7 @@ Potential feature ideas:
   
   
 Bug list:
+  - Killmail URLs linking to kill groups instead of direct kills crash the bot. (Ex: /kills/freighters)
   - Killmail URLs ending with /#comments causes the bot to reply without killmail information.
   - If killmail is strikenthrough it replies without any scraped information. (Ex: http://www.reddit.com/r/Eve/comments/36wwbo/the_scope_jackdaw_enters_caldari_navy_service/crhs44k)
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
