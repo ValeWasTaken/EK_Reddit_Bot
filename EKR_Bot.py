@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader Bot v1.952'
+    user_agent='EVE: Online Killmail Reader Bot v1.953'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking'
                'links.')
@@ -141,10 +141,9 @@ def read_killmail(killmails):
             v_corp = '<No Corp>'
             v_alliance = '<No Alliance>'
 
-        # Ex: Leviathan(Titan)
         v_ship_type = ''.join(
             (soup.find("td", style="width: 100%").get_text()).split()
-            )
+            ) # Ex: Leviathan(Titan)
         if startswith_vowel(v_ship_type):
             v_ship_type = 'n ' + v_ship_type
         else:
@@ -155,10 +154,9 @@ def read_killmail(killmails):
         v_rigging_link = v_rigging_link.find_all(
             'a', href=re.compile('/o.smium.org/loadout/'))[0]['href']
 
-        # Ex: Nyx
         kb_ship_type = soup.find_all('tr', class_="attacker")[0]
         kb_ship_type = kb_ship_type.find_all(
-            'a', href=re.compile('/ship/'))[0].img.get('alt')
+            'a', href=re.compile('/ship/'))[0].img.get('alt') # Ex: Nyx
         if startswith_vowel(kb_ship_type):
             kb_ship_type = 'n ' + kb_ship_type
         else:
