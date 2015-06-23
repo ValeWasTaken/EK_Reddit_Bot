@@ -24,4 +24,3 @@ Bug list:
   - If killmail is strikenthrough it replies without any scraped information. (Ex: http://www.reddit.com/r/Eve/comments/36wwbo/the_scope_jackdaw_enters_caldari_navy_service/crhs44k)
   - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
   - Bot does not handle NPC / structure deaths well, needs adjusting. Ex: (https://zkillboard.com/kill/45500149/)
-  - Bot sometimes reports incorrect killer's ship type Ex: (https://zkillboard.com/kill/45107784/) reports a Manticore instead of a Tengu.
