@@ -3,7 +3,6 @@ Notes for EKRB:
 
 To do list:
   - Fix bugs
-  - Add hover-to-view fitting info
   - Add statements to convert "system X" to "the X system" when appropriate
   - Add sec-status
   - Add support for threads links (instead of just comments)
