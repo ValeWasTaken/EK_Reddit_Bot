@@ -1,6 +1,3 @@
-Notes for EKRB:
-
-
 To do list:
   - Fix bugs
   - Add statements to convert "system X" to "the X system" when appropriate
