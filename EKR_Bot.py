@@ -8,11 +8,12 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v1.953'
+    user_agent='EVE: Online Killmail Reader v1.954'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking'
                'links.')
-r.login('username', 'password')
+username, password = [line.rstrip('\n') for line in open('user_info.txt')]
+r.login(username, password)
 loop_count = 0
 
 
