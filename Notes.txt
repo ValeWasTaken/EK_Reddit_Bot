@@ -6,7 +6,6 @@ To do list:
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
-  - Merge said posting support to interact with the EKR_Bot.py file.
   - Update to new PRAW standards
   - Look into adding more features
   
