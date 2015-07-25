@@ -7,7 +7,7 @@ EKRB is a web-scraping bot has 2 core functions. The first is it searches the <a
 
 EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
 
-Version 1.954 supports zkillboard and posts the following information:
+Version 2.0.0 supports zkillboard and posts the following information:
 - ISK Dropped
 - ISK Destroyed
 - Total ISK
