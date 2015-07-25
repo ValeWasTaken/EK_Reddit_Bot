@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.0 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -8,16 +8,138 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v1.954'
+    user_agent='EVE: Online Killmail Reader v2.0.0'
                'Created by /u/Valestrum '
-               'Designed to help users get killmail info without clicking'
-               'links.')
+               'Designed to help users get killmail info without clicking '
+               'links and to post threads on kills detected to be worth '
+               '20 billion or more ISK.')
 username, password = [line.rstrip('\n') for line in open('user_info.txt')]
 r.login(username, password)
+subreddit = r.get_subreddit("zkillboard")
 loop_count = 0
 
 
-def condense_value(num, suffix='ISK'):
+def find_kills():
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        Check for 1 billion+ ISK value kills on zkillboard.com
+        Then return the kill # to be used in check_cache()
+    '''
+    url = 'https://zkillboard.com/kills/10b/'
+    soup = BeautifulSoup(urllib.urlopen(url).read(), "html.parser")
+
+    kill_ids = []
+    num_of_killmails = len(soup.find_all('a', href=re.compile('/kill/')))
+
+    for x in range(num_of_killmails):
+        # Only use every 3rd killmail due to each link being stated 3 times.
+        if x % 3 == 0:
+            kill_id = soup.find_all('a', 
+                        href=re.compile('/kill/'))[x]['href'][:-9]
+            kill_ids.append(kill_id)
+    return(kill_ids)
+
+
+def check_cache(kill_ids):
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        Compare web-scraped kill_ids with ids already saved in cache.
+        Then return the new ids found for analyze_kills()
+    '''
+    new_ids = []
+    with open('recorded_kills.txt', 'r') as cache:
+        existing = cache.read().splitlines()
+    with open('recorded_kills.txt', 'a+') as cache:
+        for kill_id in kill_ids:
+            if kill_id not in(existing):
+                existing.append(kill_id)
+                new_ids.append(kill_id)
+    return(new_ids)
+
+
+def analyze_kills(new_ids):
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        Analyze new kills found and record relevant information.
+        Then return information for usage in post_threads()
+    '''
+    thread_info = []
+    for new_id in new_ids:
+        url = 'https://zkillboard.com' + new_id
+        soup = BeautifulSoup(urllib.urlopen(url).read(), "html.parser")
+    
+        isk_worth = soup.find("strong", class_="item_dropped").get_text()
+        isk_worth = condense_value_for_thread(int(isk_worth[:-7].replace(',', '')))
+
+        # Only record kills that are worth 20bil ISK or more.
+        if float(isk_worth[:-5]) > 19.99:
+            with open('recorded_kills.txt', 'a+') as cache:
+                print("New 20b+ kill found! Kill #: " + new_id)
+                cache.write(new_id + '\n')
+            #time = soup.find('td', class_="info_kill_dttm").get_text()[11:]
+            
+            # v = victim
+            v_pilot = soup.find_all(
+                'a', href=re.compile('/character/'))[1].get_text()
+            v_ship = soup.find_all(
+                'a', href=re.compile('/ship/'))[1].get_text()
+            try:
+                v_corp = soup.find_all(
+                    'a', href=re.compile('/corporation/'))[1].get_text()
+            except IndexError:
+                v_corp = "<No Corp>"
+            try:
+                v_alliance = soup.find_all(
+                    'a', href=re.compile('/alliance/'))[1].get_text()
+                title = "Kill Alert: {0} {1} {2} owned by {3} of {4} has "\
+                        "been destroyed.".format(
+                            v_alliance, isk_worth, v_ship, v_pilot, v_corp)
+            except IndexError:
+                v_alliance = "<No Alliance>"
+                title = "Kill Alert: {0} {1} owned by {2} of {3} has "\
+                        "been destroyed.".format(
+                            isk_worth, v_ship, v_pilot, v_corp)
+                            
+            thread_info.append(title)
+            thread_info.append(url)
+    return(thread_info)
+
+
+def create_threads(thread_info):
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        Post thread(s) to desired subreddit and then waits for next loop. 
+    '''
+    titles, links = [], []
+    x = 0
+    for item in thread_info:
+        if x % 2 == 0:
+            titles.append(item)
+        else:
+            links.append(item)
+        x += 1
+    for thread in range(len(titles)):
+        title, link = titles[thread], links[thread]
+        r.submit(subreddit, title, url=link, captcha=None)
+
+
+def condense_value_for_thread(num, suffix='ISK'):
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        condense_value() condenses the ISK (EVE-online currency) values from
+        Examples such as: "123,456,789.00 ISK"
+        Into neater forms such as: "123.46 million ISK"
+    '''
+    if num > 999999999999999:
+        return("%s %s") % (num, suffix)
+    else:
+        for unit in ['', 'k', 'm', 'b', 't']:
+            if abs(num) < 1000.0:
+                return "%.2f%s %s" % (num, unit, suffix)
+            num /= 1000.0
+
+
+def condense_value_for_reply(num, suffix='ISK'):
     '''
         condense_value() condenses the ISK (EVE-online currency) values from
         Examples such as: "123,456,789.00 ISK"
@@ -30,64 +152,8 @@ def condense_value(num, suffix='ISK'):
             if abs(num) < 1000.0:
                 return "%.2f %s %s" % (num, unit, suffix)
             num /= 1000.0
-
-
-def run_bot():
-    ''' 
-        run_bot() consists of 7 main parts that push the bot through its main
-        processes.
-
-        Part 1. Open and read cache file of recorded comments replied to.
-        Part 2. Go to subreddit /r/eve and check the latest 150 comments.
-        Part 3. Find comments containing zkillboard.com links and set them
-                apart.
-        Part 4. Check that killmails is not empty and comments have not
-                already been replied to using the cache.
-        Part 5. Save comment ID into cache.
-        Part 6. Send zkillboard URL into read_killmail()
-        Part 7. Reply to comment.
-    '''
-    # Part 1
-    with open('cache.txt', 'r') as cache:
-        existing = cache.read().splitlines()
-
-    # Part 2
-    subreddit = r.get_subreddit("eve")
-    comments = subreddit.get_comments(limit=150)
-
-    with open('cache.txt', 'a+') as cache:
-        for comment in comments:
-            comment_text = comment.body.lower()
-
-            # Part 3
-            killmails = [
-                item for item in comment_text.split()
-                if re.match(r"https://zkillboard\.com/kill/*", item)
-                ]
-
-            # Part 4
-            if not(killmails and comment.id not in existing):
-                continue
-
-            mails = []
-            for mail in killmails:
-                # Check that the end of the killmail URL is not corrupted.
-                # (IE: Prevent 'zkillboard.com/kill/123.') from crashing
-                # the program.
-                if mail.startswith('https://zkill') or \
-                   mail.startswith('http://zkill'):
-                    if mail[-1:] in '1234567890/':
-                        mails.append(mail)
-            existing.append(comment.id)
-            # Part 5
-            cache.write(comment.id + '\n')
-            print("I found a new comment! The ID is: " + comment.id)
-            # Part 6
-            report = read_killmail(mails)
-            # Part 7
-            comment.reply(report)
-
-
+            
+            
 def startswith_vowel(string):
     return string.lower()[0] in 'aeiou'
 
@@ -108,12 +174,12 @@ def read_killmail(killmails):
     # Part 1
     for url in killmails:
         # Part 2
-        soup = BeautifulSoup(urllib.urlopen(url).read())
+        soup = BeautifulSoup(urllib.urlopen(url).read(), "html.parser")
         isk_dropped = soup.find("td", class_="item_dropped").get_text()
         isk_destroyed = soup.find("td", class_="item_destroyed").get_text()
         isk_total = soup.find("strong", class_="item_dropped").get_text()
         isk_dropped, isk_destroyed, isk_total = [
-            condense_value(int(value[:-7].replace(',', ''))) for
+            condense_value_for_reply(int(value[:-7].replace(',', ''))) for
             value in [isk_dropped, isk_destroyed, isk_total]
             ]
 
@@ -213,7 +279,7 @@ def read_killmail(killmails):
                   'EK_Reddit_Bot/blob/master/EKR_Bot.py'
 
     return(
-        "Hi, I am a killmail reader bot."
+        "Hi, I am a killmail reader bot. "
         "Let me summarize killmail for you!" +
         reply_data +
         "\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active "
@@ -221,13 +287,80 @@ def read_killmail(killmails):
         "Suggestions](%s) ^^| ^^[Code](%s)") % (
             msg_bot_link, github_link)
 
+def post_replies():
+    ''' 
+        run_reply_function() consists of 7 main parts that push the bot through its main
+        processes.
+
+        Part 1. Open and read cache file of recorded comments replied to.
+        Part 2. Go to the subreddit and check the latest 150 comments.
+        Part 3. Find comments containing zkillboard.com links and set them
+                apart.
+        Part 4. Check that killmails is not empty and comments have not
+                already been replied to using the cache.
+        Part 5. Save comment ID into cache.
+        Part 6. Send zkillboard URL into read_killmail()
+        Part 7. Reply to comment.
+    '''
+    # Part 1
+    with open('cache.txt', 'r') as cache:
+        existing = cache.read().splitlines()
+
+    # Part 2
+    comments = subreddit.get_comments(limit=150)
+
+    with open('cache.txt', 'a+') as cache:
+        for comment in comments:
+            comment_text = comment.body.lower()
+
+            # Part 3
+            killmails = [
+                item for item in comment_text.split()
+                if re.match(r"https://zkillboard\.com/kill/*", item)
+                ]
+
+            # Part 4
+            if not(killmails and comment.id not in existing):
+                continue
+
+            mails = []
+            for mail in killmails:
+                # Check that the end of the killmail URL is not corrupted.
+                # (IE: Prevent 'zkillboard.com/kill/123.') from crashing
+                # the program.
+                if mail.startswith('https://zkill') or \
+                   mail.startswith('http://zkill'):
+                    if mail[-1:] in '1234567890/':
+                        mails.append(mail)
+            existing.append(comment.id)
+            # Part 5
+            cache.write(comment.id + '\n')
+            print("I found a new comment! The ID is: " + comment.id)
+            # Part 6
+            report = read_killmail(mails)
+            # Part 7
+            comment.reply(report)
+
+def post_threads():
+    '''
+        -- Exclusively used by thread posting portion of bot. -- 
+        Initiate the bot to go through the thread posting functions.
+    '''
+    create_threads(
+        analyze_kills(
+            check_cache(
+                find_kills())))
+
+
 while True:
     try:
-        run_bot()
+        post_replies()
+        post_threads()
     except requests.ConnectionError as e:
         print(e)
         time.sleep(60)
-        run_bot()
+        post_replies()
+        post_threads()
     loop_count += 1
     print("Program loop #"+str(loop_count)+" completed successfully.")
     time.sleep(1200)
