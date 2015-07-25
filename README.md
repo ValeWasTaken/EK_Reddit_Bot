@@ -3,7 +3,9 @@ EK_Reddit_Bot
 
 EVE: Online Killmail Reddit Bot (EKRB)
 
-EKRB is a web-scraping bot that searches the <a href="http://www.reddit.com/r/eve">/r/eve sub-reddit</a> for posts containing killmail links before posting a reply to said post with the "TL;DR" of the killmail. This bot is primarily for mobile phone / tablet users who would otherwise be too inconvienced to view a killmail link or links, users with low connection speeds who load killmail pages very slowly, and PC users who would simply rather quickly see the gist of the information rather than clicking 10 different links alike. EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
+EKRB is a web-scraping bot has 2 core functions. The first is it searches the <a href="http://www.reddit.com/r/eve">/r/eve sub-reddit</a> for posts containing killmail links before posting a reply to said post with the "TL;DR" of the killmail. This bot is primarily for mobile phone / tablet users who would otherwise be too inconvienced to view a killmail link or links, users with low connection speeds who load killmail pages very slowly, and PC users who would simply rather quickly see the gist of the information rather than clicking 10 different links alike. The second function being it detects any kills on zkillboard.com worth 20 billion or more ISK and then posts a thread onto the /r/eve subreddit with the core information as the title.
+
+EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
 
 Version 1.954 supports zkillboard and posts the following information:
 - ISK Dropped
@@ -16,8 +18,11 @@ Version 1.954 supports zkillboard and posts the following information:
 - Date of kill
 - Corp and alliance information for victim and pilot scoring killing blow
 
-Screenshot example:
+Screenshot example of function one (post reply):
 <img src="http://i.imgur.com/aWuhJt1.png"</img>
+
+Screenshot example of function two (post thread):
+<img src="http://i.imgur.com/1mU7C4T.png"</img>
 
 More features will be added in the future if desired.
 Please see the attached <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/Notes.txt">Notes.txt</a> file for more information.
