@@ -28,8 +28,7 @@ This can be changed to any other zkillboard kill or it can be several killmails 
 
 For testing <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py">EKR_Bot.py</a> the steps to take are the following:
 - Begin by creating a new Reddit account
-- Change the line in the program: <i>r.login('username', 'password')</i> to the new account's information.
-  - Ex: <i>r.login('TestAccount123', 'Password123')</i>
+- Create a text file called "user_info.txt" with the username and password on lines 1 and 2 respectively. Store this file in the same directory as EKR_Bot.py
 - Change the line in the program: <i>r.get_subreddit("eve")</i> to the testing subreddit:
   - <i>r.get_subreddit("test")</i>
 - Create a "cache.text" file and store it in the folder where you have EKR_Bot.py
