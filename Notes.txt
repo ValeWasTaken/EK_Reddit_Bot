@@ -12,6 +12,7 @@ To do list:
   
 Potential feature ideas:
   - Add to all popular Eve-related subreddits
+  - Limit thread posting to one per X minutes
   - Create a voat.co version
   
   
