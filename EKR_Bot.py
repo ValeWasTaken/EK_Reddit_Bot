@@ -316,7 +316,8 @@ def post_replies():
             # Part 3
             killmails = [
                 item for item in comment_text.split()
-                if re.match(r"https://zkillboard\.com/kill/*", item)
+                #Get the link, and add it to the list if +nokmbot is not present in the comment.
+                if re.match(r"https://zkillboard\.com/kill/*", item) and not re.match(r"\+nokmbot", item)
                 ]
 
             # Part 4
