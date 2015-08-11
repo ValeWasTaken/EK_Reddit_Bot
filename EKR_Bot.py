@@ -15,7 +15,7 @@ r = praw.Reddit(
                '20 billion or more ISK.')
 username, password = [line.rstrip('\n') for line in open('user_info.txt')]
 r.login(username, password)
-subreddit = r.get_subreddit("zkillboard")
+subreddit = r.get_subreddit("zkillboard") # Change this to "eve" for live usage.
 loop_count = 0
 
 
@@ -317,8 +317,8 @@ def post_replies():
             killmails = [
                 item for item in comment_text.split()
                 #Get the link, and add it to the list if +nokmbot is not present in the comment.
-                if re.match(r"https://zkillboard\.com/kill/*", item) and not re.match(r"\+nokmbot", item)
-                ]
+                if re.match(r"https://zkillboard\.com/kill/*", item) 
+                and not re.match(r"\+nokmbot", item)]
 
             # Part 4
             if not(killmails and comment.id not in existing):
