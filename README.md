@@ -9,7 +9,7 @@ The second function being it detects any kills on zkillboard.com worth 20 billio
 
 EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
 
-Version 2.0.2 supports zkillboard and posts the following information:
+Version 2.0.3 supports zkillboard and posts the following information:
 - ISK Dropped
 - ISK Destroyed
 - Total ISK
@@ -25,6 +25,8 @@ Screenshot example of function one (post reply):
 
 Screenshot example of function two (post thread):
 <img src="http://i.imgur.com/1mU7C4T.png"</img>
+
+Note: By adding the phrase "+nokmbot" to a post Killmail_Bot will ignore the post and not reply.
 
 More features will be added in the future if desired.
 Please see the attached <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/Notes.txt">Notes.txt</a> file for more information.
