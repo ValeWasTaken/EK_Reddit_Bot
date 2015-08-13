@@ -20,13 +20,13 @@ Version 2.0.3 supports zkillboard and posts the following information:
 - Date of kill
 - Corp and alliance information for victim and pilot scoring killing blow
 
+As well as a thread posting feature specified above and recognization of the "+nokmbot" phrase in comments to skip a Killmail_Bot response. 
+
 Screenshot example of function one (post reply):
 <img src="http://i.imgur.com/aWuhJt1.png"</img>
 
 Screenshot example of function two (post thread):
 <img src="http://i.imgur.com/1mU7C4T.png"</img>
-
-Note: By adding the phrase "+nokmbot" to a post Killmail_Bot will ignore the post and not reply.
 
 More features will be added in the future if desired.
 Please see the attached <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/Notes.txt">Notes.txt</a> file for more information.
