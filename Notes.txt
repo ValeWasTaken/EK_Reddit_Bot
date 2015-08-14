@@ -7,13 +7,12 @@ To do list:
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
   - Update to new PRAW standards
+  - Limit thread posting to one per X minutes
   - Look into adding more features
   
   
 Potential feature ideas:
   - Add to all popular Eve-related subreddits
-  - Limit thread posting to one per X minutes
-  - Create a voat.co version
   
   
 Bug list:
