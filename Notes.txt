@@ -11,8 +11,9 @@ To do list:
   - Look into adding more features
   
   
-Potential feature ideas:
+Potential features / ideas:
   - Add to all popular Eve-related subreddits
+  - Rewrite program to use many more functions each serving a specific purpose instead of multi-use functions.
   
   
 Bug list:
