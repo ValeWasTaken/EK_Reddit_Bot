@@ -8,6 +8,7 @@ To do list:
   - Add a way to detect "MONDAY TRASH TALK THREAD" and modify killmail accordingly.
   - Update to new PRAW standards
   - Limit thread posting to one per X minutes
+  - Add an error catcher that prints comment ID if an error is found.
   - Look into adding more features
   
   
