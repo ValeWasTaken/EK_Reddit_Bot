@@ -3,7 +3,7 @@ EK_Reddit_Bot
 
 EVE: Online Killmail Reddit Bot (EKRB)
 
-EKRB is a web-scraping bot has two core functions. The first is it searches the <a href="http://www.reddit.com/r/eve">/r/eve sub-reddit</a> for posts containing killmail links before posting a reply to said post with the "TL;DR" of the killmail. This bot is primarily for mobile phone / tablet users who would otherwise be too inconvienced to view a killmail link or links, users with low connection speeds who load killmail pages very slowly, and PC users who would simply rather quickly see the gist of the information rather than clicking 10 different links alike. 
+EKRB is a web-scraping bot has two core functions. The first is it searches the <a href="http://www.reddit.com/r/eve">/r/eve sub-reddit</a> for posts containing zkillboard.com killmail links before posting a reply to said post with the summary of the killmail. This bot is primarily for mobile phone / tablet users who would otherwise be too inconvienced to view a killmail link or links, users with low connection speeds who load killmail pages very slowly, and PC users who would simply rather quickly see the gist of the information rather than clicking 10 different links alike. 
 
 The second function being it detects any kills on zkillboard.com worth 20 billion or more ISK and then posts a thread onto the /r/eve subreddit with the core information as the title.
 
