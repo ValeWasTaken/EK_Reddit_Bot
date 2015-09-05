@@ -9,6 +9,7 @@ To do list:
   - Update to new PRAW standards
   - Limit thread posting to one per X minutes
   - Add an error catcher that prints comment ID if an error is found.
+  - Automatically delete comments with -1 or lower points.
   - Look into adding more features
   
   
