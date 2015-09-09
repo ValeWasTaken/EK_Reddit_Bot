@@ -14,7 +14,7 @@ Take a look for yourself to see the full list of currently needed contributions.
 Depending on your change you will use one or the other. If your contribution is solely to do with zkillboard.com and non-Reddit-specific parts of the program, then you should use <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot_Safe_Test.py">EKR_Bot_Safe_Test.py</a> which is ready for instant use and does not interact with Reddit so it is safe to change the code however you like and test it. If however your contribution will involve Reddit interaction, then you should be using <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot.py">EKR_Bot.py</a> however, if you are using the later please make extra sure to read the rest of this file before trying to test the code.
 <HR></HR>
 <h4> Third - Install packages used in your version and make required changes to your file. </h4>
-I won't get into installation guides because there are a million on the internet already, but if you are unsure where to start, all packages should be installable with <a href="https://pypi.python.org/pypi/pip/">pip</a>
+I won't get into installation guides because there are a million on the internet already, but if you are unsure where to start, all packages should be installable with <a href="https://pypi.python.org/pypi/pip/">pip</a>. Just make sure you are using Python **2.7**!
 
 As for the required changes to your file it depends on which file from above you are testing with.
 For testing <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/EKR_Bot_Safe_Test.py">EKR_Bot_Safe_Test.py</a> all you need to know is on the last line of the file the program is called with the example line: 
