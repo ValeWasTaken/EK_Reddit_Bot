@@ -141,9 +141,9 @@ def condense_value_for_thread(num, suffix='ISK'):
 
 def condense_value_for_reply(num, suffix='ISK'):
     '''
-        condense_value() condenses the ISK (EVE-online currency) values from
-        Examples such as: "123,456,789.00 ISK"
-        Into neater forms such as: "123.46 million ISK"
+        Same as above but used for the reply function. 
+        The difference is the bot will spell out the words (ex: "million")
+        instead of using the abbreviation. (This is done for aesthetics.)
     '''
     if num > 999999999999999:
         return("%s %s") % (num, suffix)
