@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.4 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.41 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -91,7 +91,7 @@ def analyze_kills(new_ids):
             try:
                 v_alliance = soup.find_all(
                     'a', href=re.compile('/alliance/'))[1].get_text()
-                title = "Kill Alert: {0} {1} {2} owned by {3} of {4} has "\
+                title = "[Kill Alert] {0} {1} {2} owned by {3} of {4} has "\
                         "been destroyed.".format(
                             v_alliance, isk_worth, v_ship, v_pilot, v_corp)
             except IndexError:
