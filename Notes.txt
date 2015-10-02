@@ -16,6 +16,7 @@ To do list:
 Potential features / ideas:
   - Add to all popular Eve-related subreddits
   - Rewrite program to use many more functions each serving a specific purpose instead of multi-use functions.
+  - Rewrite the program using Python 3.4
   
   
 Bug list:
