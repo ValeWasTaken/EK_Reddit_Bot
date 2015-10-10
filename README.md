@@ -26,7 +26,7 @@ Screenshot example of function one (post reply):
 <img src="http://i.imgur.com/sEFgp91.png"</img>
 
 Screenshot example of function two (post thread):
-<img src="http://i.imgur.com/1mU7C4T.png"</img>
+<img src="http://i.imgur.com/XosUdyn.png"</img>
 
 More features will be added in the future if desired.
 Please see the attached <a href="https://github.com/ArnoldM904/EK_Reddit_Bot/blob/master/Notes.txt">Notes.txt</a> file for more information.
