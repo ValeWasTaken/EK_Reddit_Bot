@@ -154,8 +154,7 @@ def condense_value_for_reply(num, suffix='ISK'):
             num /= 1000.0
             
             
-def startswith_vowel(string):
-    return string.lower()[0] in 'aeiou'
+startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
 
 
 def read_killmail(killmails):
