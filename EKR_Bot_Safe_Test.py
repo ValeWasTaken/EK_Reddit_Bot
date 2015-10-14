@@ -28,12 +28,11 @@ def condense_value(num, suffix='ISK'):
             num /= 1000.0
 
 
-def startswith_vowel(string):
-    return string.lower()[0] in 'aeiou'
+startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
 
 
 def read_killmail(killmails):
-    '''
+    ''' 
         read_killmail() consists of 4 main parts that serve to scrape
         zkillboard.com and then return the information in a way that is
         suited for a Reddit comment.
@@ -48,7 +47,7 @@ def read_killmail(killmails):
     # Part 1
     for url in killmails:
         # Part 2
-        soup = BeautifulSoup(urllib.urlopen(url).read())
+        soup = BeautifulSoup(urllib.urlopen(url).read(), "html.parser")
         isk_dropped = soup.find("td", class_="item_dropped").get_text()
         isk_destroyed = soup.find("td", class_="item_destroyed").get_text()
         isk_total = soup.find("strong", class_="item_dropped").get_text()
@@ -82,10 +81,9 @@ def read_killmail(killmails):
             v_corp = '<No Corp>'
             v_alliance = '<No Alliance>'
 
-        # Ex: Leviathan(Titan)
         v_ship_type = ''.join(
             (soup.find("td", style="width: 100%").get_text()).split()
-            )
+            ) # Ex: Leviathan(Titan)
         if startswith_vowel(v_ship_type):
             v_ship_type = 'n ' + v_ship_type
         else:
@@ -96,10 +94,9 @@ def read_killmail(killmails):
         v_rigging_link = v_rigging_link.find_all(
             'a', href=re.compile('/o.smium.org/loadout/'))[0]['href']
 
-        # Ex: Nyx
         kb_ship_type = soup.find_all('tr', class_="attacker")[0]
         kb_ship_type = kb_ship_type.find_all(
-            'a', href=re.compile('/ship/'))[0].img.get('alt')
+            'a', href=re.compile('/ship/'))[0].img.get('alt') # Ex: Nyx
         if startswith_vowel(kb_ship_type):
             kb_ship_type = 'n ' + kb_ship_type
         else:
@@ -155,8 +152,8 @@ def read_killmail(killmails):
                   'EK_Reddit_Bot/blob/master/EKR_Bot.py'
 
     print(
-        "Hi, I am a killmail reader bot."
-        "Let me summarize killmail for you!" +
+        "Hi, I am a killmail reader bot. "
+        "Let me summarize that for you!" +
         reply_data +
         "\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active "
         "^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^["
