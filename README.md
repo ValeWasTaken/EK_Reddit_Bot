@@ -23,7 +23,7 @@ Version 2.0.43 supports zkillboard and posts the following information:
 As well as a thread posting feature specified above and recognization of the "+nokmbot" phrase in comments to skip a Killmail_Bot response. 
 
 Screenshot example of function one (post reply):
-<img src="http://i.imgur.com/sEFgp91.png"</img>
+<img src="http://i.imgur.com/pHgPJDN.png"</img>
 
 Screenshot example of function two (post thread):
 <img src="http://i.imgur.com/XosUdyn.png"</img>
