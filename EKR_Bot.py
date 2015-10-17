@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.42 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.43 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v2.0.42'
+    user_agent='EVE: Online Killmail Reader v2.0.43'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking '
                'links and to post threads on kills detected to be worth '
@@ -17,6 +17,7 @@ username, password = [line.rstrip('\n') for line in open('user_info.txt')]
 r.login(username, password)
 subreddit = r.get_subreddit("eve")
 loop_count = 0
+startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
 
 
 def find_kills():
@@ -69,7 +70,7 @@ def analyze_kills(new_ids):
         soup = BeautifulSoup(urllib.urlopen(url).read(), "html.parser")
     
         isk_worth = soup.find("strong", class_="item_dropped").get_text()
-        isk_worth = condense_value_for_thread(int(isk_worth[:-7].replace(',', '')))
+        isk_worth = condense_value(int(isk_worth[:-7].replace(',', '')))
 
         # Only record kills that are worth 20bil ISK or more.
         if float(isk_worth[:-5]) > 19.99:
@@ -123,12 +124,11 @@ def create_threads(thread_info):
         r.submit(subreddit, title, url=link, captcha=None)
 
 
-def condense_value_for_thread(num, suffix='ISK'):
+def condense_value(num, suffix='ISK'):
     '''
-        -- Exclusively used by thread posting portion of bot. -- 
         condense_value() condenses the ISK (EVE-online currency) values from
         Examples such as: "123,456,789.00 ISK"
-        Into neater forms such as: "123.46 million ISK"
+        Into neater forms such as: "123.46m ISK"
     '''
     if num > 999999999999999:
         return("%s %s") % (num, suffix)
@@ -137,24 +137,6 @@ def condense_value_for_thread(num, suffix='ISK'):
             if abs(num) < 1000.0:
                 return "%.2f%s %s" % (num, unit, suffix)
             num /= 1000.0
-
-
-def condense_value_for_reply(num, suffix='ISK'):
-    '''
-        Same as above but used for the reply function. 
-        The difference is the bot will spell out the words (ex: "million")
-        instead of using the abbreviation. (This is done for aesthetics.)
-    '''
-    if num > 999999999999999:
-        return("%s %s") % (num, suffix)
-    else:
-        for unit in ['', 'thousand', 'million', 'billion', 'trillion']:
-            if abs(num) < 1000.0:
-                return "%.2f %s %s" % (num, unit, suffix)
-            num /= 1000.0
-            
-            
-startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
 
 
 def read_killmail(killmails):
@@ -178,7 +160,7 @@ def read_killmail(killmails):
         isk_destroyed = soup.find("td", class_="item_destroyed").get_text()
         isk_total = soup.find("strong", class_="item_dropped").get_text()
         isk_dropped, isk_destroyed, isk_total = [
-            condense_value_for_reply(int(value[:-7].replace(',', ''))) for
+            condense_value(int(value[:-7].replace(',', ''))) for
             value in [isk_dropped, isk_destroyed, isk_total]
             ]
 
