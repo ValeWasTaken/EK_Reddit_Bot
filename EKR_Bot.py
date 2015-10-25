@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.43 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.44 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v2.0.43'
+    user_agent='EVE: Online Killmail Reader v2.0.44'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking '
                'links and to post threads on kills detected to be worth '
@@ -225,10 +225,9 @@ def read_killmail(killmails):
                 kb_alliance = '<No Alliance>'
             # Part 3
             reply_data.append(
-                "\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed "
-                "in system %s by %s of (%s | %s) flying a%s along with %s"
-                "others." % (
-                    date, v_ship_type, v_pilot_name, v_corp,
+                "\n\n>On {0} a{1}s piloted by {2} of ({3} | {4}) was destroyed "
+                "in system {5} by {6} of ({7} | {8}) flying a{9}s along with "
+                "{10} others.".format(date, v_ship_type, v_pilot_name, v_corp,
                     v_alliance, system, kb_pilot_name, kb_corp,
                     kb_alliance, kb_ship_type, other_pilots))
         else:
@@ -236,9 +235,9 @@ def read_killmail(killmails):
             kb_pilot_name = kb_pilot_name.find_all(
                 'a', href=re.compile('/character/'))[0].img.get('alt')
             people_data = (
-                "\n\n>On %s a%s piloted by %s of (%s | %s) was destroyed in "
-                "system %s by %s flying a%s along with %s other" % (
-                    date, v_ship_type, v_pilot_name, v_corp,
+                "\n\n>On {0} a{1}s piloted by {2} of ({3} | {4}) was destroyed "
+                "in system {5} by {6}s flying a{7}s along with {8} "
+                "other".format(date, v_ship_type, v_pilot_name, v_corp,
                     v_alliance, system, kb_pilot_name,
                     kb_ship_type, other_pilots))
             if int(other_pilots) == 1:
@@ -247,10 +246,9 @@ def read_killmail(killmails):
                 people_data += "s."
             reply_data.append(people_data)
         reply_data.append(
-            "\n\n>Value dropped: %s\n\n>Value destroyed: %s\n\n>Total value: "
-            "%s\n\n>[%s's %s](%s)\n\n" % (
-                isk_dropped, isk_destroyed, isk_total,
-                v_pilot_name, v_rigging_text, v_rigging_link)
+            "\n\n>Value dropped: {0}\n\n>Vale destroyed: {1}\n\n>Total value: "
+            "{2}\n\n>[{3}'s {4}]({5})\n\n".format(isk_dropped, isk_destroyed,
+                isk_total, v_pilot_name, v_rigging_text, v_rigging_link)
                 + ('-'*50))
     reply_data = ('\n\n'.join(reply_data))
 
@@ -265,8 +263,7 @@ def read_killmail(killmails):
         reply_data +
         "\n\n^^This ^^bot ^^is ^^open ^^source ^^& ^^in ^^active "
         "^^development! ^^Please ^^feel ^^free ^^to ^^contribute: ^^["
-        "Suggestions](%s) ^^| ^^[Code](%s)") % (
-            msg_bot_link, github_link)
+        "Suggestions]({0}) ^^| ^^[Code]({1})").format(msg_bot_link, github_link)
 
 def post_replies():
     ''' 
@@ -344,5 +341,5 @@ while True:
         post_replies()
         post_threads()
     loop_count += 1
-    print("Program loop #"+str(loop_count)+" completed successfully.")
+    print("Program loop #{0} completed successfully.".format(loop_count))
     time.sleep(1200)
