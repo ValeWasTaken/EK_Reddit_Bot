@@ -1,7 +1,6 @@
 To do list:
   - Fix bugs
   - Add statements to convert "system X" to "the X system" when appropriate
-  - Add sec-status
   - Add support for threads links (instead of just comments)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
@@ -17,6 +16,7 @@ Potential features / ideas:
   - Add to all popular Eve-related subreddits
   - Rewrite program to use many more functions each serving a specific purpose instead of multi-use functions.
   - Rewrite the program using Python 3.4
+  - Add sec status
   
   
 Bug list:
