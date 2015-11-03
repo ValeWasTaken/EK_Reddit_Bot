@@ -163,3 +163,5 @@ def read_killmail(killmails):
 
 # Edit line below to change or add killmails.
 read_killmail(['https://zkillboard.com/kill/46955779/'])
+# Note: You can check multiple killmails at once like so.. 
+read_killmail(['https://zkillboard.com/kill/49975474/','https://zkillboard.com/kill/49860622/','https://zkillboard.com/kill/49861044/'])
