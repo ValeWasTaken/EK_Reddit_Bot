@@ -1,6 +1,5 @@
 To do list:
   - Fix bugs
-  - Add statements to convert "system X" to "the X system" when appropriate
   - Add support for threads links (instead of just comments)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
