@@ -9,12 +9,12 @@ To do list:
   - Add an error catcher that prints comment ID if an error is found.
   - Automatically delete low rated comments and threads.
   - Convert to Python 3.4
+  - Rewrite program using more docstrings and more specifically tasked functions.
   - Look into adding more features
   
   
 Potential features / ideas:
   - Add to all popular Eve-related subreddits
-  - Rewrite program to use many more functions each serving a specific purpose instead of multi-use functions.
   
   
 Bug list:
