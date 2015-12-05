@@ -1,4 +1,5 @@
 To do list:
+  - Find a way to pass the "AlreadySubmitted" PRAW error.
   - Fix bugs
   - Add support for replying to thread killmail links (instead of just comments.)
   - Add hover-to-view format
