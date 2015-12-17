@@ -1,6 +1,6 @@
 To do list:
-  - Find a way to pass the "AlreadySubmitted" PRAW error.
   - Fix bugs
+  - Find a way to pass the "AlreadySubmitted" PRAW error.
   - Add support for replying to thread killmail links (instead of just comments.)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
@@ -9,6 +9,7 @@ To do list:
   - Limit thread posting to one per X minutes
   - Add an error catcher that prints comment ID if an error is found.
   - Automatically delete low rated comments and threads.
+  - Detect killmails within hyperlinking words.
   - Convert to Python 3.4
   - Rewrite program using more docstrings and more specifically tasked functions.
   - Look into adding more features
