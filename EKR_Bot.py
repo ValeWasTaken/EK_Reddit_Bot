@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.46 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.47 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v2.0.46'
+    user_agent='EVE: Online Killmail Reader v2.0.47'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking '
                'links and to post threads on kills detected to be worth '
@@ -226,7 +226,7 @@ def read_killmail(killmails):
             # Part 3
             reply_data.append(
                 "\n\n>On {0} a{1}s piloted by {2} of ({3} | {4}) was destroyed "
-                "in system {5} by {6} of ({7} | {8}) flying a{9}s along with "
+                "in system {5} by {6} of ({7} | {8}) flying a{9} along with "
                 "{10} others.".format(date, v_ship_type, v_pilot_name, v_corp,
                     v_alliance, system, kb_pilot_name, kb_corp,
                     kb_alliance, kb_ship_type, other_pilots))
@@ -236,7 +236,7 @@ def read_killmail(killmails):
                 'a', href=re.compile('/character/'))[0].img.get('alt')
             people_data = (
                 "\n\n>On {0} a{1}s piloted by {2} of ({3} | {4}) was destroyed "
-                "in system {5} by {6}s flying a{7}s along with {8} "
+                "in system {5} by {6}s flying a{7} along with {8} "
                 "other".format(date, v_ship_type, v_pilot_name, v_corp,
                     v_alliance, system, kb_pilot_name,
                     kb_ship_type, other_pilots))
