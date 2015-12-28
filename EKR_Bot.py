@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.45 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.46 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v2.0.45'
+    user_agent='EVE: Online Killmail Reader v2.0.46'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking '
                'links and to post threads on kills detected to be worth '
@@ -254,8 +254,7 @@ def read_killmail(killmails):
 
     # Part 4
     msg_bot_link = 'http://www.reddit.com/message/compose?to=Killmail_Bot'
-    github_link = 'https://github.com/ArnoldM904/' \
-                  'EK_Reddit_Bot/blob/master/EKR_Bot.py'
+    github_link = 'https://github.com/ArnoldM904/EK_Reddit_Bot'
 
     return(
         "Hi, I am a killmail reader bot. "
