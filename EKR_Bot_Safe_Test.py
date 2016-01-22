@@ -13,6 +13,9 @@ import requests                 # ConnectionErrors, rerunning the program.
 import urllib   # Access internet and make network requests
 
 
+startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
+
+
 def condense_value(num, suffix='ISK'):
     '''
         condense_value() condenses the ISK (EVE-online currency) values from
@@ -26,10 +29,7 @@ def condense_value(num, suffix='ISK'):
             if abs(num) < 1000.0:
                 return "%.2f %s %s" % (num, unit, suffix)
             num /= 1000.0
-
-
-startswith_vowel = lambda string: string.lower()[0] in 'aeiou'
-
+            
 
 def read_killmail(killmails):
     ''' 
