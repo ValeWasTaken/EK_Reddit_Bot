@@ -1,5 +1,4 @@
 To do list:
-  - Fix bugs
   - Find a way to pass the "AlreadySubmitted" PRAW error.
   - Add support for replying to thread killmail links (instead of just comments.)
   - Add hover-to-view format
@@ -12,7 +11,6 @@ To do list:
   - Detect killmails within hyperlinking words.
   - Convert to Python 3.4
   - Rewrite program using more docstrings and more specifically tasked functions.
-  - Look into adding more features
   
   
 Potential features / ideas:
