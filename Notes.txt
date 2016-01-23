@@ -9,8 +9,7 @@ To do list:
   - Add an error catcher that prints comment ID if an error is found.
   - Automatically delete low rated comments and threads.
   - Detect killmails within hyperlinking words.
-  - Convert to Python 3.4
-  - Rewrite program using more docstrings and more specifically tasked functions.
+  - Rewrite using Python 3.4+
   
   
 Potential features / ideas:
