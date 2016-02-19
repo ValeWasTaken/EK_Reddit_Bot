@@ -10,6 +10,7 @@ To do list:
   - Automatically delete low rated comments and threads.
   - Detect killmails within hyperlinking words.
   - Rewrite using Python 3.4+
+  - Rewrite thread posting format to be more easily read.
   
   
 Potential features / ideas:
