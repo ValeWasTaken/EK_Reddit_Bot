@@ -9,7 +9,7 @@ The second function being it detects any kills on zkillboard.com worth 20 billio
 
 EKRB is still in active development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
 
-Version 2.0.47 supports zkillboard and posts the following information:
+Version 2.0.48 supports zkillboard and posts the following information:
 - ISK Dropped
 - ISK Destroyed
 - Total ISK
@@ -19,7 +19,6 @@ Version 2.0.47 supports zkillboard and posts the following information:
 - The fitting of the victim's ship
 - Date of kill
 - Corp and alliance information for victim and pilot scoring killing blow
-- Recognization of the "+nokmbot" phrase in comments to skip a Killmail_Bot response. 
 
 Screenshot example of function one (post reply):
 <img src="http://i.imgur.com/pHgPJDN.png"</img>
