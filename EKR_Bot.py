@@ -1,4 +1,4 @@
-# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.47 - Python 2.7
+# EVE: Online Killmail Reddit Bot (EKRB) - Version 2.0.48 - Python 2.7
 
 from bs4 import BeautifulSoup   # Web scraping
 import praw                     # Python Reddit API Wrapper
@@ -293,9 +293,7 @@ def post_replies():
             # Part 3
             killmails = [
                 item for item in comment_text.split()
-                #Get the link, and add it to the list if +nokmbot is not present in the comment.
-                if re.match(r"https://zkillboard\.com/kill/*", item) 
-                and not re.match(r"\+nokmbot", item)]
+                if re.match(r"https://zkillboard\.com/kill/*", item)]
 
             # Part 4
             if not(killmails and comment.id not in existing):
