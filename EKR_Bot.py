@@ -8,7 +8,7 @@ import time     # Timer for running the bot every set amount of time
 import urllib   # Access internet and make network requests
 
 r = praw.Reddit(
-    user_agent='EVE: Online Killmail Reader v2.0.47'
+    user_agent='EVE: Online Killmail Reader v2.0.48'
                'Created by /u/Valestrum '
                'Designed to help users get killmail info without clicking '
                'links and to post threads on kills detected to be worth '
