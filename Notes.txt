@@ -11,6 +11,7 @@ To do list:
   - Detect killmails within hyperlinking words.
   - Rewrite using Python 3.4+
   - Rewrite thread posting format to be more easily read.
+  - Find information on killing blow pilot for thread posting.
   
   
 Potential features / ideas:
