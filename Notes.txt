@@ -1,5 +1,4 @@
 To do list:
-  - Find a way to pass the "AlreadySubmitted" PRAW error.
   - Add support for replying to thread killmail links (instead of just comments.)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
