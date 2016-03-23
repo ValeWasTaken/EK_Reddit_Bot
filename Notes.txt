@@ -1,13 +1,12 @@
 To do list:
-  - Add support for replying to thread killmail links (instead of just comments.)
+  - Add support for replying to thread killmail links (but ignore killmail_bot threads)
   - Add hover-to-view format
   - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
   - Add a way to detect all "<x>day thread"s on /r/eve and modify killmail accordingly.
   - Update to new PRAW login / authentication standards
-  - Limit thread posting to one per X minutes
+  - Limit thread posting to one per XX minutes
   - Add an error catcher that prints comment ID if an error is found.
   - Automatically delete low rated comments and threads.
-  - Detect killmails within hyperlinking words.
   - Rewrite using Python 3.4+
   - Rewrite thread posting format to be more easily read.
   - Find information on killing blow pilot for thread posting.
