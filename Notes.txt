@@ -1,0 +1,24 @@
+To do list:
+  - Add support for replying to thread killmail links (but ignore killmail_bot threads)
+  - Add hover-to-view format
+  - Add corp and alliance for pilot scoring killing blow in a non-1v1 fight
+  - Add a way to detect all "<x>day thread"s on /r/eve and modify killmail accordingly.
+  - Update to new PRAW login / authentication standards
+  - Limit thread posting to one per XX minutes
+  - Add an error catcher that prints comment ID if an error is found.
+  - Automatically delete low rated comments and threads.
+  - Rewrite using Python 3.4+
+  - Rewrite thread posting format to be more easily read.
+  - Find information on killing blow pilot for thread posting.
+  
+  
+Potential features / ideas:
+  - Add to all popular Eve-related subreddits
+  
+  
+Bug list:
+  - Killmail URLs ending with something other than /kill/<number> result in bugs.
+  - If killmail is strikenthrough it replies without any scraped information. (Ex: http://www.reddit.com/r/Eve/comments/36wwbo/the_scope_jackdaw_enters_caldari_navy_service/crhs44k)
+  - If NPCs are responsible for the most damage killing blow player name may end up as ammo.
+  - Killer's alliance sometimes incorrectly displays <No Alliance>. Ex: (https://www.reddit.com/r/Eve/comments/3ecvdv/moa_coercer_never_stood_a_chance/ctdpmo1)
+  - Ship name of pilot scoring the killing blow is incorrectly the ship-type of top damaging pilot instead.
