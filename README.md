@@ -7,7 +7,7 @@ EKRB is a web-scraping bot has two core functions. The first is it searches the 
 
 The second function being it detects any kills on zkillboard.com worth 20 billion or more ISK and then posts a thread onto the /r/eve subreddit with the core information as the title.
 
-EKRB is still in development and could very much use any help, please feel free to look over the code, ask questions, and help improve it. :)
+**EKRB is no longer in development and has been canceled until further notice. If you are interested in reviving the project, please feel free to email vehk@protonmail.com and I would happy to discuss the process of porting it to Reddit's new API and Python 3.**
 
 Version 2.0.48 supports zkillboard and posts the following information:
 - ISK Dropped
